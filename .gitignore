@@ -1,0 +1,39 @@
+# Python & Bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+*.pyd
+
+# Віртуальні середовища (Virtual Environments)
+.venv/
+venv/
+ENV/
+env/
+env.bak/
+venv.bak/
+
+# Visual Studio (кеш, налаштування користувача, тимчасові файли)
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Visual Studio Code
+.vscode/
+
+# Дублікати графіків у підпапці коду (в репозиторії залишаються тільки графіки в корені для README)
+lab1/*.png
+bundle_trajectories.png
+
+# Логи та тимчасові файли
+*.log
+*.tmp
+*.bak
+*.swp
+
+# Системні файли ОС
+Thumbs.db
+Desktop.ini
+.DS_Store
