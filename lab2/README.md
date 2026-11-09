@@ -90,3 +90,4 @@ lab2/
    ```bash
    python lab2.py
    ```
+
