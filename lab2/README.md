@@ -75,10 +75,12 @@ $$u(t) = \begin{cases} c_1, & t \in [0, t_1] \\ c_2, & t \in (t_1, T] \end{cases
 
 ```text
 lab2/
-├── lab2.py                   # Повний самодостатній скрипт моделювання та візуалізації
-├── requirements.txt          # Необхідні бібліотеки (numpy, scipy, matplotlib)
+├── lab2-program/
+│   ├── lab2.py               # Повний самодостатній скрипт моделювання та візуалізації
+│   └── requirements.txt      # Необхідні бібліотеки (numpy, scipy, matplotlib)
 ├── state_trajectories.png    # Графік траєкторій стану x(t) (300 DPI)
 ├── control_functions.png     # Графік функцій керування u(t) (300 DPI)
+├── Лаб2 Удс .pdf             # Вирішення задачі аналітичним способом
 └── README.md                 # Математичний опис та інструкція
 ```
 
@@ -88,11 +90,13 @@ lab2/
 
 1. Встановіть необхідні залежності:
    ```bash
-   pip install -r requirements.txt
+   pip install -r lab2-program/requirements.txt
    ```
 
 2. Запустіть програму:
    ```bash
+   python lab2-program/lab2.py
+   ```
    python lab2.py
    ```
 

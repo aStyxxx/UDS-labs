@@ -110,6 +110,7 @@ print(f"                                  c2 = {c2_piecewise:10.6f} | x(T)  = {x
 print("=" * 80, flush=True)
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
+output_dir = os.path.dirname(script_dir) if os.path.basename(script_dir) == "lab2-program" else script_dir
 
 colors = {
     'const': '#1f77b4',   
@@ -138,7 +139,7 @@ ax1.grid(True, linestyle='--', alpha=0.3)
 ax1.legend(loc='best', fontsize=9.5, framealpha=0.92)
 fig1.tight_layout()
 
-file_traj = os.path.join(script_dir, "state_trajectories.png")
+file_traj = os.path.join(output_dir, "state_trajectories.png")
 fig1.savefig(file_traj, dpi=300, bbox_inches='tight')
 print(f"[Успіх] Графік траєкторій стану збережено у: {file_traj}", flush=True)
 
@@ -164,7 +165,7 @@ ax2.grid(True, linestyle='--', alpha=0.3)
 ax2.legend(loc='best', fontsize=9.5, framealpha=0.92)
 fig2.tight_layout()
 
-file_ctrl = os.path.join(script_dir, "control_functions.png")
+file_ctrl = os.path.join(output_dir, "control_functions.png")
 fig2.savefig(file_ctrl, dpi=300, bbox_inches='tight')
 print(f"[Успіх] Графік функцій керування збережено у: {file_ctrl}", flush=True)
 
