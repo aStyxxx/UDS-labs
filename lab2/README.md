@@ -78,8 +78,8 @@ lab2/
 ├── lab2-program/
 │   ├── lab2.py               # Повний самодостатній скрипт моделювання та візуалізації
 │   └── requirements.txt      # Необхідні бібліотеки (numpy, scipy, matplotlib)
-├── state_trajectories.png    # Графік траєкторій стану x(t) (300 DPI)
-├── control_functions.png     # Графік функцій керування u(t) (300 DPI)
+├── state_trajectories.png    # Графік траєкторій стану x(t)
+├── control_functions.png     # Графік функцій керування u(t)
 ├── Лаб2 Удс .pdf             # Вирішення задачі аналітичним способом
 └── README.md                 # Математичний опис та інструкція
 ```
