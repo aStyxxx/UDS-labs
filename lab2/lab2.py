@@ -130,10 +130,9 @@ print(f"                                  c2 = {c2_piecewise:10.6f} | x(T)  = {x
 print("=" * 80, flush=True)
 
 # =====================================================================
-# 6. ВІЗУАЛІЗАЦІЯ ТРАЄКТОРІЙ ТА КЕРУВАНЬ
+# 6. ВІЗУАЛІЗАЦІЯ ТРАЄКТОРІЙ ТА КЕРУВАНЬ (2 ОКРЕМІ ГРАФІКИ)
 # =====================================================================
-fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 6))
-fig.patch.set_facecolor('#ffffff')
+script_dir = os.path.dirname(os.path.abspath(__file__))
 
 # Колірна палітра та стилі ліній
 colors = {
@@ -143,36 +142,51 @@ colors = {
     'piece': '#9467bd'      # Фіолетовий
 }
 
-# --- ЛІВИЙ ГРАФІК: Траєкторії стану x(t) ---
+# ---------------------------------------------------------------------
+# ГРАФІК 1: Траєкторії стану x(t)
+# ---------------------------------------------------------------------
+fig1, ax1 = plt.subplots(figsize=(8.5, 6), dpi=300)
+fig1.patch.set_facecolor('#ffffff')
 ax1.set_facecolor('#fafbfc')
-ax1.plot(t, x_const, label=f"1. Постійне (c = {c_const:.2f})", color=colors['const'], linestyle='-', linewidth=2.0)
-ax1.plot(t, x_lin, label=f"2. Лінійне (c = {c_lin:.2f})", color=colors['lin'], linestyle='--', linewidth=2.0)
-ax1.plot(t, x_fb, label=f"3. Зворотний зв'язок (c = {c_fb:.2f})", color=colors['fb'], linestyle='-.', linewidth=2.0)
-ax1.plot(t, x_piecewise, label=f"4. Кусково-постійне (c₁ = {c1:.2f}, c₂ = {c2_piecewise:.2f})", color=colors['piece'], linestyle=':', linewidth=2.4)
+
+ax1.plot(t, x_const, label=f"1. Постійне (c = {c_const:.2f})", color=colors['const'], linestyle='-', linewidth=2.2)
+ax1.plot(t, x_lin, label=f"2. Лінійне (c = {c_lin:.2f})", color=colors['lin'], linestyle='--', linewidth=2.2)
+ax1.plot(t, x_fb, label=f"3. Зворотний зв'язок (c = {c_fb:.2f})", color=colors['fb'], linestyle='-.', linewidth=2.2)
+ax1.plot(t, x_piecewise, label=f"4. Кусково-постійне (c₁ = {c1:.2f}, c₂ = {c2_piecewise:.2f})", color=colors['piece'], linestyle=':', linewidth=2.5)
 
 # Позначення характерних точок
 ax1.plot(0, x0, marker='o', markersize=8, color='#004085', zorder=5, label=f"Початок (0, {x0:.1f})")
-ax1.plot(T, y0, marker='*', markersize=12, color='#721c24', zorder=5, label=f"Ціль (T, {y0:.1f})")
+ax1.plot(T, y0, marker='*', markersize=13, color='#721c24', zorder=5, label=f"Ціль (T, {y0:.1f})")
 ax1.plot(t1, x_at_t1, marker='D', markersize=7, color='#6f42c1', zorder=5, label=f"Перемикання t₁ ({t1:.2f}, {x_at_t1:.2f})")
 
-ax1.set_title("Фазові траєкторії стану $x(t)$", fontsize=13, fontweight='bold', pad=12)
+ax1.set_title("Фазові траєкторії стану системи $x(t)$", fontsize=13, fontweight='bold', pad=12)
 ax1.set_xlabel("Час $t$", fontsize=11)
 ax1.set_ylabel("Стан системи $x(t)$", fontsize=11)
 ax1.grid(True, linestyle='--', alpha=0.3)
 ax1.legend(loc='best', fontsize=9.5, framealpha=0.92)
+fig1.tight_layout()
 
-# --- ПРАВИЙ ГРАФІК: Керування u(t) ---
+file_traj = os.path.join(script_dir, "state_trajectories.png")
+fig1.savefig(file_traj, dpi=300, bbox_inches='tight')
+print(f"[Успіх] Графік траєкторій стану збережено у: {file_traj}", flush=True)
+
+# ---------------------------------------------------------------------
+# ГРАФІК 2: Функції керування u(t)
+# ---------------------------------------------------------------------
+fig2, ax2 = plt.subplots(figsize=(8.5, 6), dpi=300)
+fig2.patch.set_facecolor('#ffffff')
 ax2.set_facecolor('#fafbfc')
-ax2.plot(t, u_const, label=f"1. Постійне (c = {c_const:.2f})", color=colors['const'], linestyle='-', linewidth=2.0)
-ax2.plot(t, u_lin, label=f"2. Лінійне (u = {c_lin:.2f}·t)", color=colors['lin'], linestyle='--', linewidth=2.0)
-ax2.plot(t, u_fb, label=f"3. Зворотний зв'язок (u = {c_fb:.2f}·x)", color=colors['fb'], linestyle='-.', linewidth=2.0)
+
+ax2.plot(t, u_const, label=f"1. Постійне (c = {c_const:.2f})", color=colors['const'], linestyle='-', linewidth=2.2)
+ax2.plot(t, u_lin, label=f"2. Лінійне (u = {c_lin:.2f}·t)", color=colors['lin'], linestyle='--', linewidth=2.2)
+ax2.plot(t, u_fb, label=f"3. Зворотний зв'язок (u = {c_fb:.2f}·x)", color=colors['fb'], linestyle='-.', linewidth=2.2)
 
 # Для кусково-постійного керування будуємо сходинку з чіткою вертикальною лінією
 t_step = np.array([0.0, t1, t1, T])
 u_step = np.array([c1, c1, c2_piecewise, c2_piecewise])
-ax2.plot(t_step, u_step, label=f"4. Кусково-постійне (c₁ = {c1:.2f}, c₂ = {c2_piecewise:.2f})", color=colors['piece'], linestyle=':', linewidth=2.4)
+ax2.plot(t_step, u_step, label=f"4. Кусково-постійне (c₁ = {c1:.2f}, c₂ = {c2_piecewise:.2f})", color=colors['piece'], linestyle=':', linewidth=2.5)
 
-# Вертикальна пунктирна лінія для моменту перемикання t1
+# Вертикальна лінія для позначення моменту перемикання t1
 ax2.axvline(t1, color='#6c757d', linestyle='--', linewidth=1.0, alpha=0.6)
 ax2.plot([t1, t1], [c1, c2_piecewise], marker='o', markersize=5, linestyle='', color=colors['piece'])
 
@@ -181,23 +195,12 @@ ax2.set_xlabel("Час $t$", fontsize=11)
 ax2.set_ylabel("Керування $u(t)$", fontsize=11)
 ax2.grid(True, linestyle='--', alpha=0.3)
 ax2.legend(loc='best', fontsize=9.5, framealpha=0.92)
+fig2.tight_layout()
 
-plt.tight_layout()
+file_ctrl = os.path.join(script_dir, "control_functions.png")
+fig2.savefig(file_ctrl, dpi=300, bbox_inches='tight')
+print(f"[Успіх] Графік функцій керування збережено у: {file_ctrl}", flush=True)
 
-# =====================================================================
-# 7. ЗБЕРЕЖЕННЯ ТА ВІДОБРАЖЕННЯ
-# =====================================================================
-script_dir = os.path.dirname(os.path.abspath(__file__))
-plot_filename = "control_plots.png"
-output_path = os.path.join(script_dir, plot_filename)
-fig.savefig(output_path, dpi=300, bbox_inches='tight')
-print(f"[Успіх] Графік збережено у: {output_path}")
-
-# Зберігаємо копію в корені робочої директорії, якщо запущено з кореня
-cwd_output = os.path.abspath(plot_filename)
-if cwd_output != output_path:
-    fig.savefig(cwd_output, dpi=300, bbox_inches='tight')
-    print(f"[Успіх] Графік також збережено у: {cwd_output}")
-
+# Відображення вікон графіків
 plt.show()
 
