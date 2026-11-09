@@ -63,8 +63,8 @@ $$u(t) = \begin{cases} c_1, & t \in [0, t_1] \\ c_2, & t \in (t_1, T] \end{cases
 
 ## 📈 Візуалізація
 
-### 1. Фазові траєкторії стану $x(t)$
-![Фазові траєкторії стану](state_trajectories.png)
+### 1. Траєкторії стану $x(t)$
+![Траєкторії стану](state_trajectories.png)
 
 ### 2. Функції керування $u(t)$
 ![Функції керування](control_functions.png)
@@ -77,7 +77,7 @@ $$u(t) = \begin{cases} c_1, & t \in [0, t_1] \\ c_2, & t \in (t_1, T] \end{cases
 lab2/
 ├── lab2.py                   # Повний самодостатній скрипт моделювання та візуалізації
 ├── requirements.txt          # Необхідні бібліотеки (numpy, scipy, matplotlib)
-├── state_trajectories.png    # Графік фазових траєкторій x(t) (300 DPI)
+├── state_trajectories.png    # Графік траєкторій стану x(t) (300 DPI)
 ├── control_functions.png     # Графік функцій керування u(t) (300 DPI)
 └── README.md                 # Математичний опис та інструкція
 ```
